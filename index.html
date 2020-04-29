@@ -41,14 +41,15 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+				<section data-background-image="imagenes/fondo.jpg">
 					<h1>Deep Learning</h1>
 					<h3>Con Keras y TensorFlow</h3>
 					<p>
 						<small>Creado por Roberto Saavedra, Alejandro Rayo y Sergio Rodriguez</small>
 					</p>
+					<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@thomschneider?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Thom Schneider"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Thom Schneider</span></a>
 				</section >
-                <section " data-background="https://media3.giphy.com/media/EBysPyjz3BHVu/giphy.gif?cid=ecf05e47d4606f58882ed4867140e9f37daa6639bb99db11&rid=giphy.gif">
+                <section data-background="https://media3.giphy.com/media/EBysPyjz3BHVu/giphy.gif?cid=ecf05e47d4606f58882ed4867140e9f37daa6639bb99db11&rid=giphy.gif">
                 <!--<h1>CONTENIDOS</h1>
                 <h4>IA, Machine Learning y Deep Learning</h4>
                 <h4>Motivación e Introducción a las redes neuronales</h4>
@@ -449,6 +450,11 @@ Reveal.addEventListener( 'customevent', function() {
 
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
+				multiplex: {
+		        url: 'https://reveal-js-multiplex-ccjbegmaii.now.sh/token',
+		        id: '947881096f937525',
+		        secret: Reveal.getQueryHash().s || null
+				},
 				controls: true,
 				progress: true,
 				center: true,
@@ -463,7 +469,12 @@ Reveal.addEventListener( 'customevent', function() {
 					{ src: 'plugin/highlight/highlight.js' },
 					{ src: 'plugin/search/search.js', async: true },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+
+					{ src: 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js', async: true },
+        	        { src: Reveal.getQueryHash().s ?
+		            'plugin/multiplex/master.js' :
+								'plugin/multiplex/client.js', async: true }
 				]
 			});
 

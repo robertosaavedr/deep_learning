@@ -113,6 +113,18 @@ from tensorflow import keras
 					</section>
                     <section data-background-image='https://miro.medium.com/max/2482/0*xqJA1mCMLc7b64H1.png'>
 					</section>
+					<section data-background-image="imagenes/uno.svg" data-background-position="-195px">
+
+					</section>
+					<section data-background-image="imagenes/dos.svg" data-background-position="-225px">
+
+					</section>
+					<section data-background-image="imagenes/tres.svg" data-background-position="-225px">
+
+					</section>
+					<section data-background-image="imagenes/cuatro.svg" data-background-position="-280px">
+
+					</section>
                     <section data-background-image="imagenes/ar.svg" data-background-position="-400px">
 					<div style="position: absolute; zoom: 0.7; width: 60%; right: 0;">
 						<pre class="python"><p class="fragment"><code data-trim data-line-numbers="1|2|3|4|1-5">
@@ -175,17 +187,139 @@ red_neuronal_2.fit(imagenes_entrenamiento,
 					</pre>
 					</section>
 					</section>
-
-
-				<section data-background-color="black">
-					<img src="https://distill.pub/2020/grand-tour/figs/conv.gif" style="background:none; border:none; box-shadow:none;">
-
+<section>
+				<section>
+<h3>REDES NEURONALES CONVOLUCIONALES</h3>
 				</section>
+								<section>
+								<img src="imagenes/rome.jpg" style="background:none; border:none; box-shadow:none;">
+								</section>
+	<section data-background-color="white">
+		<img src="imagenes/pez.png" style="background:none; border:none; box-shadow:none;">
+	</section>
+	<section data-background-color="white">
+			    <img src="imagenes/capas.png" style="background:none; border:none; box-shadow:none;">
+
+	</section>
+	<section data-background-color="white">
+		<img src="imagenes/filter1.png" style="background:none; border:none; box-shadow:none;height:75%; width:75%" >
+
+	</section>
+	<section data-background-color="white">
+		<img src="imagenes/filter2.png" style="background:none; border:none; box-shadow:none; height:75%; width:75%" >
+		<img src="imagenes/filter3.png" style="background:none; border:none; box-shadow:none; height:75%; width:75%">
+	</section>
+	<section data-background-color="white">
+		 <img src="imagenes/pooling.png" style="background:none; border:none; box-shadow:none;">
+	</section>
+	<section data-background-color="white">
+		 <img src="imagenes/arqui.png" style="background:none; border:none; box-shadow:none;">
+	</section>
+
+</section>
 
 				<section>
-					<IMG SRC="https://learning.oreilly.com/library/view/hands-on-machine-learning/9781492032632/assets/mls2_1426.png" style="background:none; border:none; box-shadow:none;">
+				<section>
+					<h3>MODELOS PRE-ENTRENADOS</h3>
 				</section>
 
+				<section data-background-color="black">
+					<h3>RESNET-50</h3>
+					<h3>+</h3>
+					<IMG SRC="imagenes/inet.jpeg" style="background:none; border:none; box-shadow:none;">
+
+				</section>
+					<section>
+						<IMG SRC="imagenes/castillo.jpg" style="background:none; border:none; box-shadow:none; height:40%; width:40%">
+						<IMG SRC="imagenes/perro.jpg" style="background:none; border:none; box-shadow:none; height:40%; width:40%">
+
+					</section>
+					<section>
+						<div style="zoom: 0.40;">
+						<pre class="python" ><code class="stretch" data-trim data-line-numbers="1-3|6-8|10-11|13|15-16|1-16">
+from urllib.request import urlopen, Request
+import matplotlib.pyplot as plt
+import tensorflow as tf
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
+imagen_perro = plt.imread(urlopen(Request('https://cdn.pixabay.com/photo/2015/11/17/13/13/dogue-de-bordeaux-1047521_1280.jpg', headers=headers)), format='jpg')
+castillo = plt.imread(urlopen(Request('https://www.audioguiaroma.com/imagenes/castillo-san-angelo.jpg', headers=headers)), format='jpg')
+
+imagen_perro_crop = tf.image.resize_with_pad(imagen_perro, 224,224, antialias=True)
+castillo_crop = tf.image.resize_with_pad(castillo, 224, 224,antialias=True)
+
+imagenes = keras.applications.resnet50.preprocess_input(np.array([imagen_perro_crop, castillo_crop]))
+
+neural_network_on_steroids = keras.applications.resnet50.ResNet50(weights="imagenet")
+pred = neural_network_on_steroids.predict(imagenes)
+						</code>
+					</pre>
+						</div>
+						<p class="fragment"><table style="zoom:70%" class="fragment">
+						<thead>
+							<tr>
+
+								<th>Predicciones para perro</th>
+								<th>Probabilidad</th>
+								<th>Predicciones para castillo</th>
+								<th>Probabilidad</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>vizsla </td>
+								<td>58.95%</td>
+								<td>palace</td>
+								<td>45.57%</td>
+							</tr>
+							<tr>
+								<td>labrador_retriever</td>
+								<td>29.05%</td>
+								<td>dome</td>
+								<td>23.81%</td>
+
+							</tr>
+							<tr>
+								<td>bull_mastif</td>
+								<td>1.68%</td>
+								<td>castle</td>
+								<td>12.66%</td>
+
+							</tr>
+
+						</tbody>
+					</table></p>
+					</section>
+</section>
+
+
+				<section>
+					<section>
+						<a href="https://www.youtube.com/playlist?list=PLd7R6J6iS6r4sITNFQ3ZMvj7BzWqTXfIe" target="_blank"><p class="fragment">3Blue1Brown: Deep Learning</p></a>
+						<a href="https://www.youtube.com/playlist?list=PL-Ogd76BhmcDxef4liOGXGXLL-4h65bs4" target="_blank"><p class="fragment">Dot CSV: Aprendiendo Inteligencia Artificial</p></a>
+						<a href="https://www.coursera.org/learn/machine-learning?skipBrowseRedirect=true" target="_blank"><p class="fragment">Standford Machine Learning taught by Andrew NG </p></a>
+						<a href="https://books.google.es/books?id=HHetDwAAQBAJ&pg=PA480&lpg=PA480&dq=resize+images+tensorflow&source=bl&ots=0Kvm0rnlRr&sig=ACfU3U0Bp63g72bGIIbKQG8iZkJ3QxFOyA&hl=es&sa=X&ved=2ahUKEwjF65v-95XpAhWNAWMBHTujDW44ChDoATAHegQIChAB#v=twopage&q&f=false" target="_blank"> <p class="fragment">Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow </p>
+</a>
+						<a href="http://introtodeeplearning.com/" target="_blank"><p class="fragment">MIT Introduction to Deep Learning</p>
+ </a>
+
+
+
+
+						</section>
+					<section data-background-color="#100e0f">
+						<a href="https://github.com/robertosaavedr/deep_learning" target="_blank"><img src="imagenes/github.png" style="background:none; border:none; box-shadow:none; height:20%; width:20%"></a>
+						<a href="" target="_blank"><img src="imagenes/kaggle.png" style="background:none; border:none; box-shadow:none;"></a>
+
+					</section>
+
+				<section>
+					😘
+				</section>
+
+</section>
 
 
 

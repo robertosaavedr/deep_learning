@@ -102,14 +102,16 @@
 					<IMG SRC = 'https://s3.amazonaws.com/keras.io/img/keras-logo-2018-large-1200.png' style="background:none; border:none; box-shadow:none;">
 				</section>
 					<section>
+						<div style="zoom:0.55" >
 					<pre class="python"><code data-trim data-line-numbers="1|3|1-3">
 from tensorflow import keras
 
-(imagenes, etiquetas), (_, _) = keras.datasets.mnist.load_data()
+(imagenes_entrenamiento, etiquetas_entrenamiento), (imagenes_test, etiquetas_test) = keras.datasets.mnist.load_data()
 
 
-					</code></pre>
-						<IMG SRC='imagenes\cero.png' style="background:none; border:none; box-shadow:none;" height='450' width="450">
+					</code></pre></div>
+
+					<p class="fragment">	<IMG SRC='imagenes\cero.png' style="background:none; border:none; box-shadow:none;" height='450' width="450"></p>
 					</section>
                     <section data-background-image='https://miro.medium.com/max/2482/0*xqJA1mCMLc7b64H1.png'>
 					</section>
@@ -137,7 +139,12 @@ red_neuronal = keras.models.Sequential([
 
 					</code></p></pre>
 </div>
+
                     </section>
+					<section data-background-color="black">
+												<img src="imagenes\rayo.png" style="background:none; border:none; box-shadow:none;">
+
+					</section>
 					<section>
 
 					<pre class="python"><p class="fragment"><code data-trim data-line-numbers="1|2|3|1-3|5|6|7|5-7|1-7">
@@ -215,7 +222,33 @@ red_neuronal_2.fit(imagenes_entrenamiento,
 	<section data-background-color="white">
 		 <img src="imagenes/arqui.png" style="background:none; border:none; box-shadow:none;">
 	</section>
+<section>
+	<div style="zoom:0.7">
+	<pre class="python" ><p class="fragment"><code class="stretch" data-trim data-line-numbers="1|2|3|1-3|4|4-10|1-11">
+cnn = keras.models.Sequential([
+        keras.layers.Conv2D(64, kernel_size=3, activation='relu', input_shape= (28,28, 1)),
+        keras.layers.MaxPooling2D(),
+        keras.layers.Flatten(),
+        keras.layers.BatchNormalization(),
+        keras.layers.Dense(200, activation="selu", kernel_initializer="lecun_normal"),
+        keras.layers.BatchNormalization(),
+        keras.layers.Dense(100, activation="selu", kernel_initializer="lecun_normal"),
+        keras.layers.BatchNormalization(),
+        keras.layers.Dense(10, activation="softmax")
+])</code></p>
+					</pre></div>
 
+</section>
+	<section>
+		<div style="zoom:0.7">
+	<pre class="python" ><p class="fragment"><code class="stretch" data-trim data-line-numbers="1-2|3-4|1-4">
+cnn.compile(optimizer=keras.optimizers.SGD(lr=0.05), loss='sparse_categorical_crossentropy',
+metrics=['accuracy'])
+cnn.fit(imagenes_entrenamiento, etiquetas_entrenamiento, epochs=10,
+callbacks=[early_stopping])
+	</code></p>
+					</pre></div>
+	</section>
 </section>
 
 				<section>

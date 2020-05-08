@@ -224,30 +224,43 @@ red_neuronal_2.fit(imagenes_entrenamiento,
 	</section>
 <section>
 	<div style="zoom:0.7">
-	<pre class="python" ><p class="fragment"><code class="stretch" data-trim data-line-numbers="1|2|3|1-3|4|4-10|1-11">
+						<pre class="python" ><p class="fragment"><code class="stretch" data-trim data-line-numbers="1-8|11-12|14-15|17-18|1-18">
 cnn = keras.models.Sequential([
         keras.layers.Conv2D(64, kernel_size=3, activation='relu', input_shape= (28,28, 1)),
         keras.layers.MaxPooling2D(),
         keras.layers.Flatten(),
         keras.layers.BatchNormalization(),
-        keras.layers.Dense(200, activation="selu", kernel_initializer="lecun_normal"),
-        keras.layers.BatchNormalization(),
         keras.layers.Dense(100, activation="selu", kernel_initializer="lecun_normal"),
         keras.layers.BatchNormalization(),
         keras.layers.Dense(10, activation="softmax")
-])</code></p>
-					</pre></div>
+])
+
+cnn.compile(optimizer=keras.optimizers.SGD(lr=0.05), loss='sparse_categorical_crossentropy',
+metrics=['accuracy'])
+
+imagenes_test = imagenes_test.reshape(10000, 28, 28, 1)
+imagenes_entrenamiento = imagenes_entrenamiento.reshape(60000, 28, 28, 1)
+
+cnn.fit(imagenes_entrenamiento, etiquetas_entrenamiento, validation_split=0.1,
+epochs=30, callbacks=[early_stopping])						</code></p>
+					</pre>
+	</div>
 
 </section>
 	<section>
-		<div style="zoom:0.7">
-	<pre class="python" ><p class="fragment"><code class="stretch" data-trim data-line-numbers="1-2|3-4|1-4">
-cnn.compile(optimizer=keras.optimizers.SGD(lr=0.05), loss='sparse_categorical_crossentropy',
-metrics=['accuracy'])
-cnn.fit(imagenes_entrenamiento, etiquetas_entrenamiento, epochs=10,
-callbacks=[early_stopping])
-	</code></p>
-					</pre></div>
+		<img src="https://lh3.googleusercontent.com/uWaKvYQSx-SP3rbbaE4EWZ8f3YBYN_Ilxrg-G3zc_pgi1ZieD-uviomAvuOPeEqJOEct0bbQszucep_j0mtOo3PgyEnEVhrF8Dat0awa7O7-MnGCkqrvkjQmCFQZo06uAabBBvNDv7lS3rX_SsjTmKIg_key85dm2ueM5KXlaIHRtBP9OumdJOLn7K_uDKeJStxFZ7nOoV_Z2jsHWSz2Hxg9W0M1UioCYNYGuiuoLB3b9gwN9vBuYPbRuVoeruIDY-fInp_mnSHIPUA6CXuHF9r0Iv-cr5i4gmtoYovn63ySZ_0jXLYRYq42GS6FxXfMIusmXg54Rz02c7x2kz7AcKUIRAdJEOmuPJcVlTNJojfXtM9OC0smNPBe_KfrJGzBVwNVsdlIHlf0Y3f9BRsuF-yCyjcflRwHqXQGzJXPeWdVzoASeP_XDzboy4OQFiylOO4sCMS_xqltxoM4mxsBhyjpEnxdyprfCylw2JVeEnJ9pxK7HftZnAr1DvOHKAcKrffsTxZQ2SLnco6fVft2HsPHzezYID9JhDZec1b0vuCFQ_IEJuhaznRzsBrvmy9Qxyb9L1V-An-SVqlPcCmujTKkA_Be0REqggJl3__LL5SCxBAXAe_Y7tmDI_Yz_PL6nmy3Fs6C0NOHAPmo2gKpFyDxZIMHKfV3iwZWkt8jcjKezMclPUpewtmCc55tAw=w763-h890-no?authuser=0" style="background:none; border:none; box-shadow:none;hight:40%;width:40%">
+		<img src="https://lh3.googleusercontent.com/qGTUt2CodDn37YqVXc2NJkbt1H6G4NElk0gXR51tD9QpR5SJkxm4bB_eopiOQ_J_Ms6Tebbwj-Cpyb1A298Rxo4BDt3yrg3VShqLR2YYIt5pZsXo0uK1kwL5czGZ_knYT2l4LJtCA68NhvsY0VGFsE6Us80T1LPAu0g9XbKhWiWE38cP621JBTSX5jRxi6T5ehQ1uxoA2QeLu-6JLpMv3bN0HWx8PCGVNsFMQYabFJSH9u-PQWKPdxpkRh3QmMH9MQ6ysrHY6Mvfl_TbzvbUT5fVJJnDdB7haKwzjm7sR03fdPxhhJXXQZKyhsJG8KwHS_ueVKKD5w_I9PxmRDjCFdqvD0QRhVMeMY088yNeqw4rz2jxlr65hGqJKw1TQjjH9lDLUSp4lMsF_C2UZvWUUwEs5kWBgBppzNSARPmtdpRzec3Ata-IeAv3-3jDOB7KxwkJNpgxUSmq1pqx4Ruh10FKpR1Zpe1cfXzi6ek3fUp1R_c8giqLb8jPGpaHiUrr4le3szxACrbbXiRi5bwbwdExN0FtWH1g7E_L-or2a4Ou0rUDYmvTCLOvRN2-LUkCkwcUjC2WS25W1jEId_j_zfCQ0dyKA7SDUAQ_MfL6RR7Gip_4b97Mb-Ee0Wh7xHcUpXg93Jow1V3lwxDljFuc2_GAFZi5wwqQU4f3489TmFsgLsy20m14znL27P-Lbg=w787-h890-no?authuser=0" style="background:none; border:none; box-shadow:none;hight:40%;width:40%">
+	</section>
+
+	<section>
+<pre class="python" ><p class="fragment"><code class="stretch" data-trim data-line-numbers="1|2|1-2|4">
+prueba = 1 - (prueba/255)
+prueba = tf.resize(prueba, [28, 28])
+
+tf.predict_classes(prueba)
+				</code></p><p class="fragment">
+array([9, 8])</p>
+					</pre>
 	</section>
 </section>
 
